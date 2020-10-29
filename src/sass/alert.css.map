@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,MAAM,CAAC;EACH,KAAK,EAAE,IAAI;EACX,SAAS,EAAE,MAAM;EACjB,KAAK,ECYK,IAAI;EDXd,UAAU,EAAE,IAAI;EAChB,MAAM,EAAE,IAAI;EACZ,OAAO,EAAE,SAAS;EAClB,aAAa,EAAE,IAAI;CAStB;;AAPI,AAAD,eAAU,CAAC;EACP,gBAAgB,EAAE,OAAO;CAC5B;;AAEA,AAAD,aAAQ,CAAC;EACL,gBAAgB,EAAE,OAAO;CAC5B",
+    "sources": [
+        "alert.scss",
+        "colors.scss"
+    ],
+    "names": [],
+    "file": "alert.css"
+}
