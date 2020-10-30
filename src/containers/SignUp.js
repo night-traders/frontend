@@ -31,7 +31,7 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
         return <Redirect to='/' />;
     
     return (
-        <div>
+        <div className="mt-5">
             <Helmet>
                 <title>Realest Estate - Sign Up</title>
                 <meta
@@ -42,7 +42,7 @@ const SignUp = ({ setAlert, signup, isAuthenticated }) => {
             <h1 className="text-center mb-4 text-info" >Sign up</h1>
             <h3 className='text-center mb-4 text-info'>Create your Account</h3>
             <form className="text-center border border-light p-5" onSubmit={e => onSubmit(e)}>
-                <div class="signup orm-row mb-4">
+                <div className="signup orm-row mb-4">
                         <input 
                             className='form-control mb-4'
                             type='text'

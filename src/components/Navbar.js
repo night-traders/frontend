@@ -7,43 +7,45 @@ import PropTypes from 'prop-types';
 
 const navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     const authLinks = (
-        <a className="nav-link" onClick={logout} href='#!'>Logout</a>
+        <NavLink className="nav-link nav-link text-white" onClick={logout} href='/'>Logout</NavLink>
     );
 
     const guestLinks = (
         <Fragment>
             <li className="nav-item">
-                <Link className="nav-link" to='/login'>Login</Link>
+                <NavLink className="nav-link text-white ml-2 pl-1" to='/login'>Login</NavLink>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/signup'>Sign Up</Link>
+                <NavLink className="nav-link text-white ml-2 pl-1" to='/signup'>Sign Up</NavLink>
             </li>
         </Fragment>
     );
 
     return (
         <Fragment>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+            <nav class=" navbar navbar-expand-md navbar-dark fixed-top bg-info">
+                <Link className="text-white font-weight-bold h2 mr-3 text-decoration-none" to="/">Bull & Bear</Link>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <Link className="navbar-brand text-info" to='/'>Bull and Bear</Link>
-                    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-                        { !loading && (<Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment>) }
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul className="collapse navbar-collapse list-unstyled navbar-nav mr-left" id="navbarCollapse">
                         <li className="nav-item">
-                            <NavLink className='nav-link' exact to='/'>Home</NavLink>
+                            <NavLink className='nav-link text-white p-2' exact to='/'>Home</NavLink>
                         </li>
-                        <li class="nav-item">
-                            <NavLink className='nav-link' exact to='/listings'>Stocks</NavLink>
+                        <li className="nav-item">
+                            <NavLink className='nav-link text-white p-2' exact to='/listings'>Watchlist</NavLink>
                         </li>
-                        <li class="nav-item">
-                            <NavLink className='nav-link' exact to='/about'>About</NavLink>
+                        <li className="nav-item">
+                            <NavLink className='nav-link text-white p-2' exact to='/about'>About</NavLink>
                         </li>
                     </ul>
+                    <ul class="navbar-nav mr-right">
+                        {!loading && (<Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment>) }
+                    </ul>
                     <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
-                        <button className="btn btn-outline-info" type="submit">Search</button>
+                        <input className="form-control mr-sm-2 ml-1" type="search" placeholder="Search" aria-label="Search"></input>
+                        <button className="btn btn-info btn-outline-light mt-1" type="submit">Search</button>
                     </form>
                 </div>
             </nav>
