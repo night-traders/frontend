@@ -85,7 +85,7 @@ const Home = () => {
                 <hr className="mt-3 mb-3"></hr>
                 <div className="row">
                 {top_news[0].map(item=>
-                    <div className="col-lg-4 d-flex flex-column">
+                    <div key={item.title} className="col-lg-4 d-flex flex-column">
                         <img className="d-block w-100" src={item.image_url} alt="First slide"></img>
                         <h3>{item.title}</h3>
                         <p> <span className="text-white bg-secondary p-1">{item.source_name}</span></p>
@@ -96,7 +96,7 @@ const Home = () => {
                 </div>
                 <hr className="featurette-divider"></hr>
                 {list_news[0].map((item, index) => 
-                <div>
+                <div key={item.title}>
                     <div className="row featurette">
                         <div className={index%2?"col-md-7": "col-md-7 order-md-2"}>
                             <h3 >{item.title}</h3>
