@@ -1,4 +1,4 @@
-# Bull&Bear
+# Bull & Bear
 
 ## Team: 
 [Adam Owada](https://github.com/adamowada)  
@@ -8,8 +8,8 @@
 [Thomas Sherer](https://github.com/vorSherer) 
 
 ## Description
-Users and investors want a smarter way to get stock information and stock news.
-User would be able to add stocks to a watch list, that way the user would only receive information they care about.
+Users and investors want a smarter way to get stock information and stock news. __Bear & Bull__ provides a 'one stop' access to general stock news, capability to look up current statistics for a specific stock, and - *for registered users* - the capability to track and predict trends of favorite stocks on a 'Watch List' page, which also displays news specifically targeting those watched securities. <br>
+Registered Users would be able to add stocks to their personal watch list, that way the user would only receive information they care about! <br>
 
 
 ## Wire Frames
@@ -26,7 +26,7 @@ User would be able to add stocks to a watch list, that way the user would only r
 User Story text can be viewed [here](user_stories.md)
 
 
-### Software Requirements
+## Software Requirements
 [are listed here](requirements.md)
 
 
@@ -35,7 +35,8 @@ https://docs.google.com/drawings/d/1xuvEmNHJiQMPj4maDiDIR4pzicX3fjAEIxR8bpRGkIY/
 
 
 ## Database
-This app will be using PostgreSQL database.
+This app will be using PostgreSQL database. <br>
+
 
 ---
 ---
