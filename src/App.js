@@ -5,10 +5,9 @@ import Login from './containers/Login';
 import SignUp from './containers/SignUp';
 import Layout from './hocs/Layout';
 import ForgotPassword from './containers/ForgotPassword';
-import SearchResult from './containers/SearchResult'
-
 import { Provider } from 'react-redux';
 import store from './store';
+import Watchlist from './containers/Watchlist';
 
 
 const App = () => (
@@ -20,7 +19,7 @@ const App = () => (
                     <Route exact path='/login' component={Login} />
                     <Route exact path='/signup' component={SignUp} />
                     <Route path="/forgot-password" component={ForgotPassword} />
-                    <Route exact path='/search-result' component={SearchResult} />
+                    <Route exact path='/watchlist' component={Watchlist} />
                 </Switch>
             </Layout>
         </Router>

@@ -34,7 +34,7 @@ const navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                             <NavLink className='nav-link text-white p-2' exact to='/'>Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className='nav-link text-white p-2' exact to='/listings'>Watchlist</NavLink>
+                            <NavLink className='nav-link text-white p-2' exact to='/watchlist'>Watchlist</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className='nav-link text-white p-2' exact to='/about'>About</NavLink>
