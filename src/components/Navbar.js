@@ -23,12 +23,12 @@ const navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     return (
         <Fragment>
-            <nav class=" navbar navbar-expand-md navbar-dark fixed-top bg-info">
+            <nav className=" navbar navbar-expand-md navbar-dark fixed-top bg-info">
                 <Link className="text-white font-weight-bold h2 mr-3 text-decoration-none" to="/">Bull & Bear</Link>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="collapse navbar-collapse list-unstyled navbar-nav mr-left" id="navbarCollapse">
                         <li className="nav-item">
                             <NavLink className='nav-link text-white p-2' exact to='/'>Home</NavLink>
@@ -40,7 +40,7 @@ const navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                             <NavLink className='nav-link text-white p-2' exact to='/about'>About</NavLink>
                         </li>
                     </ul>
-                    <ul class="navbar-nav mr-right">
+                    <ul className="navbar-nav mr-right">
                         {!loading && (<Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment>) }
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
