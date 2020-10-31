@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../actions/auth';
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Form} from "react-bootstrap"
 
 const Login = ({ login, isAuthenticated }) => {
     const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ const Login = ({ login, isAuthenticated }) => {
         return <Redirect to='/' />;
     
     return (
-        <div>
+        <div className="mt-5">
             <Helmet>
                 <title>Bull&Bear - Login</title>
                 <meta

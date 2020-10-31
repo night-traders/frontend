@@ -1,3 +1,46 @@
+# Bull & Bear
+
+## Team: 
+[Adam Owada](https://github.com/adamowada)  
+[Chuck Li](https://github.com/ticochuck)  
+[Natalie Sinner](https://github.com/nsinner1)  
+[Roman Sydoruk](https://github.com/sydoruk89)  
+[Thomas Sherer](https://github.com/vorSherer) 
+
+## Description
+Users and investors want a smarter way to get stock information and stock news. __Bear & Bull__ provides a 'one stop' access to general stock news, capability to look up current statistics for a specific stock, and - *for registered users* - the capability to track and predict trends of favorite stocks on a 'Watch List' page, which also displays news specifically targeting those watched securities. <br>
+Registered Users would be able to add stocks to their personal watch list, that way the user would only receive information they care about! <br>
+
+
+## Wire Frames
+![home, not logged in](./assets/home_logout.png)
+![home, logged in](./assets/home_login.png)
+![login](./assets/login.png)
+![login](./assets/login.png)
+![logout](./assets/logout.png)
+![register](./assets/register.png)
+![profile](./assets/profile.png)
+
+
+## User Stories
+User Story text can be viewed [here](user_stories.md)
+
+
+## Software Requirements
+[are listed here](requirements.md)
+
+
+## Domain Modeling
+https://docs.google.com/drawings/d/1xuvEmNHJiQMPj4maDiDIR4pzicX3fjAEIxR8bpRGkIY/edit
+
+
+## Database
+This app will be using PostgreSQL database. <br>
+
+
+---
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
