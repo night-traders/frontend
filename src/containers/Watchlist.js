@@ -6,7 +6,7 @@ const Watchlist = () => {
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
   const[result1, setResult1] = useState();
-  const[result2, setResult2] = useState([])
+  const[result2, setResult2] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,11 +22,15 @@ const Watchlist = () => {
           });
           finnhubClient.quote(query, (error, data, response) => {
             console.log(data)
-            setResult2([data.c, data.h, data.l, data.o, data.pc])
+            if (data.c === 0) {
+              setResult2([0]);
+              }
+              else {
+            setResult2([`Current: ${data.c}`, `High: ${data.h}`, `Low: ${data.l}`, `Open: ${data.o}`, `Previous Close: ${data.pc}`])
+              }
         });
         }
         catch (err) {
-        ;
         }
     }
 
@@ -36,26 +40,32 @@ const Watchlist = () => {
 }, [query]);
 
   return (
-    <div>
-      <h1>Async React Hooks</h1>
+    <div className='container mt-5'>
+      <h1 className="text-info">Async React Hooks</h1>
       <form
         onSubmit={e => {
           e.preventDefault();
           setQuery(search)
-        }}
-      >
-        <input
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          placeholder="Search for Stocks!"
-        />
-        <button type="submit"> Search</button>
+        }}>
+        <div className='form-group'>
+          <input className='form-control'
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Search for Stocks!"
+          />
+        </div>
+        <button className='btn btn-info' type="submit"> Search</button>
       </form>
       <br />
-        <h1>Search</h1>
-        <h1>{result1}</h1>
-        {result2.map(item=>
-          <h1 key={uuidv4()}> {item}</h1>)}
+      <div>
+        <div className={result2[0] === 0?"invisible":"visible"}>
+          <h1>{result1}</h1>
+          {result2.map(item=>
+            <h1 key={uuidv4()}>{item}</h1>)}
+          <button className={result2.length>1?"btn btn-success p-2":"invisible"} type="submit"> Add to watchlist</button>
+        </div>
+        <h1 className={result2[0]===0?"visible":"invisible"}>Sorry your input is invalid, try something else!</h1>
+      </div>
     </div>
   );
 }
