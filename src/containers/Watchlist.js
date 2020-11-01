@@ -11,7 +11,7 @@ const Watchlist = () => {
   const[watchlist, setWatchlist] = useState([])
 
   useEffect(() => {
-
+      // const test = false
       const fetchData = async () => {
           try {
               const res = await axios('http://127.0.0.1:8000/api/stock/', {
@@ -19,15 +19,17 @@ const Watchlist = () => {
                 headers: {'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('access')}`},
               })
-              setWatchlist(res.data)
+              setWatchlist(res.data.results);
           }
           catch (err) {
           ;
           }
       }
-
+      // if (test !== '') {
+      //   fetchData();
+      // }
       fetchData();
-  },);
+  },[Watchlist]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +40,7 @@ const Watchlist = () => {
           api_key.apiKey = "bua9lb748v6q418gd0i0" // Replace this
           const finnhubClient = new finnhub.DefaultApi()
           finnhubClient.companyProfile2({'symbol': query}, (error, data, response) => {
-            setResult1({"name":data.name})
-            console.log(data)
+            setResult1({"name":data.name, "ticker":data.ticker})
             console.log(localStorage.getItem('access'))
           });
           finnhubClient.quote(query, (error, data, response) => {
@@ -48,7 +49,7 @@ const Watchlist = () => {
               setResult2([0]);
               }
               else {
-            setResult2({"current":data.c, "high":data.l, "low":data.l, "open_price":data.o, "previous":data.pc})
+            setResult2({"price_current":data.c, "price_high":data.l, "price_low":data.l, "price_open":data.o, "previous_close":data.pc})
               }
         });
         }
@@ -98,13 +99,15 @@ const Watchlist = () => {
       <div>
         {watchlist.map(item=>
           <div>
-            <h2 key={item.id}>{item.name} {item.high} {item.low} {item.open_price}  {item.previous}</h2>
+            <h2 key={item.id}>{item.ticker} {item.name} {item.price_current} {item.price_high} {item.price_low} {item.price_open}  {item.previous_close}</h2>
             <button className="btn btn-danger">Delete</button>
           </div>)}
       </div>
       <div>
         <div className={result2[0] === 0?"invisible":"visible"}>
-          <h1>{result1.name}</h1>
+          <h1>My Stocks</h1>
+          {Object.entries(result1).map(item=>
+            <h1 key={uuidv4()}>{item}</h1>)}          
           {Object.entries(result2).map(item=>
             <h1 key={uuidv4()}>{item}</h1>)}
           <button onClick={handler} className={Object.values(result2).length>1?"btn btn-success p-2":"invisible"} type="submit"> Add to watchlist</button>
