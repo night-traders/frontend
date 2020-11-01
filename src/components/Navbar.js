@@ -7,7 +7,11 @@ import PropTypes from 'prop-types';
 
 const navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     const authLinks = (
-        <NavLink className="nav-link nav-link text-white" onClick={logout} to='/'>Logout</NavLink>
+        <Fragment>
+            <NavLink className="nav-link nav-link text-white" onClick={logout} to='/'>Logout</NavLink>
+            <NavLink className='nav-link text-white p-2' exact to='/watchlist'>Watchlist</NavLink>
+        </Fragment>
+
     );
 
     const guestLinks = (
@@ -20,7 +24,6 @@ const navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             </li>
         </Fragment>
     );
-
     return (
         <Fragment>
             <nav className=" navbar navbar-expand-md navbar-dark fixed-top bg-info">
@@ -32,9 +35,6 @@ const navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                     <ul className="collapse navbar-collapse list-unstyled navbar-nav mr-left" id="navbarCollapse">
                         <li className="nav-item">
                             <NavLink className='nav-link text-white p-2' exact to='/'>Home</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className='nav-link text-white p-2' exact to='/watchlist'>Watchlist</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className='nav-link text-white p-2' exact to='/about'>About</NavLink>
