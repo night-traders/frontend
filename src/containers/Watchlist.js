@@ -12,6 +12,7 @@ const Watchlist = () => {
   const[watchlist, setWatchlist] = useState([]);
   const [error, setError] = useState("")
 
+
   // Render data on load page
   const fetchData = async () => {
       try {
@@ -32,6 +33,7 @@ const Watchlist = () => {
     fetchData();
   }, [])
 
+
   // Rerender page for each new stock search
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +46,7 @@ const Watchlist = () => {
           finnhubClient.companyProfile2({'symbol': query}, (error, data, response) => {
             setResult1({"name":data.name, "ticker":data.ticker})
             console.log(data)
+
             console.log(localStorage.getItem('access'))
           });
           finnhubClient.quote(query, (error, data, response) => {
