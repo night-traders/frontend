@@ -25,7 +25,7 @@ export const login = (email, password) => async dispatch => {
             payload: res.data
         });
 
-        dispatch(setAlert('Authenticated successfully', 'success'));
+        dispatch(setAlert(`Authenticated successfully! Welcome ${email}`, 'success'));
     } catch (err) {
         dispatch({
             type: LOGIN_FAIL

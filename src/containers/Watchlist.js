@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import {Alert} from "react-bootstrap"
 
 
 const Watchlist = () => {
@@ -8,27 +9,30 @@ const Watchlist = () => {
   const [query, setQuery] = useState('');
   const[result1, setResult1] = useState({});
   const[result2, setResult2] = useState({});
-  const[watchlist, setWatchlist] = useState([])
+  const[watchlist, setWatchlist] = useState([]);
+  const [error, setError] = useState("")
 
-  useEffect(() => {
-
-      const fetchData = async () => {
-          try {
-              const res = await axios('http://127.0.0.1:8000/api/stock/', {
-                method: 'GET',
-                headers: {'content-type': 'application/json',
-                authorization: `Bearer ${localStorage.getItem('access')}`},
-              })
-              setWatchlist(res.data)
-          }
-          catch (err) {
-          ;
-          }
+  // Render data on load page
+  const fetchData = async () => {
+      try {
+          const res = await axios('http://127.0.0.1:8000/api/stock/', {
+            method: 'GET',
+            headers: {'content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('access')}`},
+          })
+          setWatchlist(res.data)
+          console.log(res.data)
       }
+      catch (err) {
+        setError("Failed to load data!")
+      }
+  }
 
-      fetchData();
-  },);
+  useEffect(()=>{
+    fetchData();
+  }, [])
 
+  // Rerender page for each new stock search
   useEffect(() => {
     const fetchData = async () => {
         try {
@@ -38,7 +42,7 @@ const Watchlist = () => {
           api_key.apiKey = "bua9lb748v6q418gd0i0" // Replace this
           const finnhubClient = new finnhub.DefaultApi()
           finnhubClient.companyProfile2({'symbol': query}, (error, data, response) => {
-            setResult1({"name":data.name})
+            setResult1({"name":data.name, "ticker":data.ticker})
             console.log(data)
             console.log(localStorage.getItem('access'))
           });
@@ -46,11 +50,13 @@ const Watchlist = () => {
             console.log(data)
             if (data.c === 0) {
               setResult2([0]);
+              setError('Sorry your input is invalid, try something else!');
               }
               else {
-            setResult2({"current":data.c, "high":data.l, "low":data.l, "open_price":data.o, "previous":data.pc})
+                setResult2({"price_current":data.c, "price_high":data.l, "price_low":data.l, "price_open":data.o, "previous_close":data.pc})
+                setError("");
               }
-        });
+          });
         }
         catch (err) {
         }
@@ -61,7 +67,8 @@ const Watchlist = () => {
     }
   }, [query]);
 
-  const handler = event => {
+  // Save to Database individual stock
+  const saveToDataBase = () =>{
     fetch('http://127.0.0.1:8000/api/stock/', {
       method: 'POST',
       headers: {'content-type': 'application/json',
@@ -74,11 +81,42 @@ const Watchlist = () => {
         console.log(data);
       }
     )
-    .catch( error => console.error(error))
+    .catch( error => setError('Failed to save!'))
   };
+  useEffect(()=>{
+  }, [result1, result2])
+
+  // Event handler when clicking on save btn
+  const handler = event => {
+    saveToDataBase();
+    fetchData();
+    setResult1({});
+    setResult2({});
+  }
+
+  // Delete Stock function
+  const deleteStock = async (id) => {
+    try {
+        await axios(`http://127.0.0.1:8000/api/stock/${id}/`, {
+          method: 'DELETE',
+          headers: {'content-type': 'application/json',
+          authorization: `Bearer ${localStorage.getItem('access')}`},
+        })
+        await fetchData();
+    }
+    catch (err) {
+      setError("Failed to delete!")
+    }
+  }
+
+  // Event handler on click
+  const deleteHandler = event => {
+    deleteStock(event.target.value);
+  }
 
   return (
     <div className='container mt-5'>
+      {error && <Alert variant="danger">{error}</Alert>}
       <h1 className="text-info">Add stock to your watchlist</h1>
       <form
         onSubmit={e => {
@@ -96,20 +134,22 @@ const Watchlist = () => {
       </form>
       <br />
       <div>
-        {watchlist.map(item=>
-          <div>
-            <h2 key={item.id}>{item.name} {item.high} {item.low} {item.open_price}  {item.previous}</h2>
-            <button className="btn btn-danger">Delete</button>
-          </div>)}
+        <div className={result2[0] === 0?"invisible":"visible"}>
+        {Object.entries(result1).map(item=>
+            <h1 key={uuidv4()}>{item}</h1>)} 
+          <ul>
+            {Object.entries(result2).map(([k, v])=>
+              <li key={uuidv4()} className="list-group-item" ><span className="text-primary">{k.toUpperCase()}</span>: {v}</li>)}
+          </ul>
+            <button onClick={handler} className={Object.values(result2).length>1?"btn btn-success p-2 mb-4":"invisible d-none"} type="submit"> Add to watchlist</button>
+        </div>
       </div>
       <div>
-        <div className={result2[0] === 0?"invisible":"visible"}>
-          <h1>{result1.name}</h1>
-          {Object.entries(result2).map(item=>
-            <h1 key={uuidv4()}>{item}</h1>)}
-          <button onClick={handler} className={Object.values(result2).length>1?"btn btn-success p-2":"invisible"} type="submit"> Add to watchlist</button>
-        </div>
-        <h1 className={result2.name?"visible":"invisible"}>Sorry your input is invalid, try something else!</h1>
+        {watchlist.map(item=>
+          <div key={item.id}>
+            <h2 key={item.id}>{item.ticker} {item.name} {item.price_current} {item.price_high} {item.price_low} {item.price_open}  {item.previous_close}</h2>
+            <button value={item.id} onClick={deleteHandler} className="btn btn-danger" type="submit">Delete</button>
+          </div>)}
       </div>
     </div>
   );
