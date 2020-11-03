@@ -69,6 +69,7 @@ const Watchlist = () => {
 
   // Save to Database individual stock
   const saveToDataBase = () =>{
+
     fetch('http://127.0.0.1:8000/api/stock/', {
       method: 'POST',
       headers: {'content-type': 'application/json',
@@ -88,10 +89,15 @@ const Watchlist = () => {
 
   // Event handler when clicking on save btn
   const handler = event => {
-    saveToDataBase();
-    fetchData();
-    setResult1({});
-    setResult2({});
+    if (watchlist.includes(Object.assign(result1, result2))){
+      saveToDataBase();
+      fetchData();
+      setResult1({});
+      setResult2({});
+    }
+    else{
+      setError('Already exist in your watchlist!')
+    }
   }
 
   // Delete Stock function
