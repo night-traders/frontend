@@ -21,11 +21,11 @@ const Watchlist = () => {
             headers: {'content-type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('access')}`},
           })
-          setWatchlist(res.data)
+          setWatchlist(res.data.results)
           console.log(res.data)
       }
       catch (err) {
-        setError("Failed to load data!")
+        ;
       }
   }
 
