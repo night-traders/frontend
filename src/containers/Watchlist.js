@@ -93,13 +93,16 @@ const Watchlist = () => {
   // Event handler when clicking on save btn
   const handler = event => {
     if (watchlist.includes(Object.assign(result1, result2))){
+      setError('Already exist in your watchlist!') 
+    }
+    else if (result1.name === "" || result1.ticker === "") {
+      setError('You got wron data!') 
+    }
+    else{
       saveToDataBase();
       fetchData();
       setResult1({});
       setResult2({});
-    }
-    else{
-      setError('Already exist in your watchlist!')
     }
   }
 
