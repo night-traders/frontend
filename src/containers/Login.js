@@ -23,7 +23,7 @@ const Login = ({ login, isAuthenticated }) => {
     };
 
     if (isAuthenticated)
-        return <Redirect to='/' />;
+        return <Redirect to='/watchlist' />;
     
     return (
         <div className="mt-5">
